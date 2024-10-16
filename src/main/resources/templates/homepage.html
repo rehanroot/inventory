@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Homepage</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .product-card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="my-4">Product Listings</h1>
+
+  <!-- Search form -->
+  <form th:action="@{/}" method="get" class="form-inline my-3">
+    <input type="text" name="search" placeholder="Search by name, vendor, or category"
+           th:value="${search}" class="form-control mr-2" />
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div class="row">
+    <div class="col-md-4" th:each="product : ${products}">
+      <div class="card product-card">
+        <img th:src="@{${product.imagePath}}" class="card-img-top" alt="Product Image" width="100"/>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${product.name}"></h5>
+          <p class="card-text">
+            <strong>Vendor:</strong> <span th:text="${product.vendorName}"></span><br>
+            <strong>Category:</strong> <span th:text="${product.category}"></span><br>
+            <strong>Price:</strong> <span th:text="${product.unitPrice}"></span><br>
+            <strong>Selling Price:</strong> <span th:text="${product.sellingPrice}"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
